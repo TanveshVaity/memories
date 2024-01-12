@@ -1,14 +1,18 @@
-const express = require("express");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
+import postRouter from "./routes/posts.js";
 
 const app = express();
 
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
     credentials: true
-}))
+}));
 
-app.use(express.json({limit: "16kb"}))
-app.use(express.urlencoded({extended: true, limit: "16kb"}))
+app.use(express.json({ limit: "16kb" }));
+app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 
-module.exports = app;
+// routes
+app.use("/posts", postRouter);
+
+export default app;
